@@ -46,6 +46,7 @@ t_token	    *init_tokens(t_token *tokens, ParserState parserState);
 t_token	    *addto_emptylist(t_token *head, t_token *new);
 t_token	    *addto_end(t_token *head, t_token *new);
 void	    print_tokens(t_token *head);
+int	n_token(t_token *tokens);
 
 // libft
 int	        ft_isdigit(int c);

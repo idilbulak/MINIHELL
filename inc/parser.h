@@ -3,34 +3,24 @@
 
 typedef enum e_type
 {
-	TYPE_delimiter,
-	TYPE_string
+	TYPE_PIPE,
+	TYPE_INSERTION,
+	TYPE_EXTRACTION,
+	TYPE_REDIRECTIN,
+	TYPE_REDIRECTOUT,
+	TYPE_COMMAND,
 }	t_type;
 
-typedef enum e_dataType
+typedef struct s_ast
 {
-	DATA_doubleQuotedString,
-    DATA_singleQuotedString,
-    DATA_unquotedString
-}	t_dataType;
-
-typedef struct		s_data
-{
-	t_dataType	dataType;
-	char		*data;
-}	t_data;
-
-typedef struct		s_delimiter
-{
-	t_data				*infile;
+	char				**data;
 	struct t_ast		*outfile;
-}	t_delimiter;
-
-typedef struct		s_ast
-{
+	struct t_ast		*infile;
 	t_type				type;
-	t_delimiter			*in_out_files;
 }	t_ast;
+
+// ast_utils
+void	*print_simple_command(t_ast *tree, t_token *tokens);
 
 t_ast	*parser(t_token *tokens);
 

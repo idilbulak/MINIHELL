@@ -18,10 +18,10 @@ int	main(void)
 			exit(EXIT_FAILURE);
 		add_history(str);
 		tokens = tokenizer(str, tokens);
-		// print_tokens(tokens);
 		tree = parser(tokens);
 		free(str);
 		free(tokens);
+		free(tree);
 		// str = NULL;
 	}
 }

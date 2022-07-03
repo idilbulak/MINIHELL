@@ -57,3 +57,17 @@ void	print_tokens(t_token *head)
 	printf("\n");
 	free(current);
 }
+
+int	n_token(t_token *tokens)
+{
+	int	n;
+
+	n = 0;
+	tokens = tokens->next;
+	while (tokens->next != NULL)
+	{
+		tokens = tokens->next;
+		n++;
+	}
+	return (n);
+}
