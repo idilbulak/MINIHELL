@@ -2,51 +2,31 @@
 #include "../inc/parser.h"
 #include <stdio.h>
 
-int	check_delimiter(t_token *tokens)
-{
-	while (tokens->next != NULL)
-	{
-		if (tokens->tokenType == 1)
-			return(42);
-		tokens = tokens->next;
-	}
-	return (0);
-}
-
-t_ast	*init_tree(t_ast *tree)
-{
-	tree = malloc(sizeof(t_ast));
-	if (!tree)
-		exit(EXIT_FAILURE);
-	return(tree);
-}
-
-t_ast	*simple_command(t_token *tokens)
+t_ast	*cmd_withoutpipe(t_token *tokens)
 {
 	t_ast	*tree;
 	int		n;
 	int		i;
 
 	tree = init_tree(tree);
-	n = n_token(tokens);
-	tree->data = (char **)malloc(sizeof(char*)*(n + 1));
-	tokens = tokens->next;
-	tree->type = TYPE_COMMAND;
-	tree->data[0] = tokens->data;
-	i = 1;
-	while(i <= n)
-	{
-		tree->data[i] = tokens->next->data;
-		tokens = tokens->next;
-		i++;
-	}
-	while (tokens->prev != NULL)
-		tokens = tokens->prev;
-	print_simple_command(tree, tokens);
+	// n = n_token_withoutredirection(tokens);
+	// i = 0;
+	// while(i < n_token(tokens))
+	// {
+	// 	if (check_ifredirection(tokens))
+	// 		break;
+	// 	tree->args->data = (char **)malloc(sizeof(char*)*(n + 1));
+	// 	tree->data[i] = tokens->next->data;
+	// 	tokens = tokens->next;
+	// 	i++;
+	// }
+	// while (tokens->prev != NULL)
+	// 	tokens = tokens->prev;
+	// print_simple_command(tree, tokens);
 	return(tree);
 }
 
-t_ast	*multiple_commands(t_token *tokens)
+t_ast	*cmd_withpipe(t_token *tokens)
 {
 	t_ast	*tree;
 
@@ -60,10 +40,10 @@ t_ast	*parser(t_token *tokens)
 	t_ast	*tree;
 	int n;
 
-	if (check_delimiter(tokens) == 42)
-		tree = multiple_commands(tokens);
+	if (check_pipe(tokens) == 42)
+		tree = cmd_withpipe(tokens);
 	else
-		tree = simple_command(tokens);
+		tree = cmd_withoutpipe(tokens);
 		
 
 

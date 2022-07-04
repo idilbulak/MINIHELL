@@ -19,6 +19,7 @@ int	main(void)
 		add_history(str);
 		tokens = tokenizer(str, tokens);
 		tree = parser(tokens);
+	print_tokens(tokens);
 		free(str);
 		free(tokens);
 		free(tree);

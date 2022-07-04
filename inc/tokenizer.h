@@ -20,10 +20,16 @@ typedef enum
 typedef enum e_tokentype
 {
 	TOKEN_null,
-    TOKEN_delimiter,
-    TOKEN_doubleQuotedString,
-    TOKEN_singleQuotedString,
-    TOKEN_unquotedString
+    TOKEN_PIPE,
+    TOKEN_GREATER,
+    TOKEN_LESS,
+    TOKEN_DOUBLEGREATER,
+    TOKEN_DOUBLELESS,
+    TOKEN_STRING,
+    // TOKEN_doubleQuotedString,
+    // TOKEN_singleQuotedString,
+    // TOKEN_unquotedString,
+    TOKEN_FILEPATH
 }	t_tokentype;
 
 typedef struct		s_token
@@ -58,4 +64,10 @@ char	    *parse_quotedString( char *str, t_token *new_token, ParserState parserS
 char	    *find_delimiter( char *str, t_token *new_token, ParserState parserState);
 char	    *parse_unquotedString(char *str, t_token *new_token, ParserState parserState);
 
+
+
+int	check_ifpath(t_token *tokens);
+int	n_token_withoutredirection(t_token *tokens);
+
+int	check_ifredirection(t_token *tokens);
 #endif

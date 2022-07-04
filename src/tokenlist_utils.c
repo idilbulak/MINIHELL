@@ -63,11 +63,36 @@ int	n_token(t_token *tokens)
 	int	n;
 
 	n = 0;
-	tokens = tokens->next;
 	while (tokens->next != NULL)
 	{
 		tokens = tokens->next;
 		n++;
+	}
+	return (n);
+}
+
+int	check_ifredirection(t_token *tokens)
+{
+	if (tokens->tokenType == 2 || tokens->tokenType == 3
+			|| tokens->tokenType == 4 || tokens->tokenType == 5)
+		return(1);
+	return(0);
+}
+
+int	n_token_withoutredirection(t_token *tokens)
+{
+	int n;
+
+	n = 0;
+	while (tokens->next != NULL)
+	{
+		if (check_ifredirection(tokens) == 1)
+			tokens = tokens->next;
+		else
+		{
+			n++;
+			tokens = tokens->next;
+		}
 	}
 	return (n);
 }
