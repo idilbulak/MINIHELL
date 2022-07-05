@@ -26,30 +26,21 @@ t_ast	*cmd_withoutpipe(t_token *tokens)
 	return(tree);
 }
 
-t_ast	*cmd_withpipe(t_token *tokens)
-{
-	t_ast	*tree;
-
-	tree = init_tree(tree);
-	printf("not done yet!\n");
-	
-}
-
 t_ast	*parser(t_token *tokens)
 {
 	t_ast	*tree;
 	int n;
 
 	if (check_pipe(tokens) == 42)
-		tree = cmd_withpipe(tokens);
+	{
+		tree = init_tree(tree);
+		tree->type = WITH_PIPE;
+		tree->infile = cmd_withoutpipe(tokens);
+		tree->outfile = parser(tokens);
+		tree->args = NULL;
+	}
 	else
 		tree = cmd_withoutpipe(tokens);
-		
-
-
-
-	// printf("n = %d\n", n);
-	// printf("parser");
 	// print_tokens(tokens);
 
 
