@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/07/06 10:25:01 by ibulak        #+#    #+#                 */
+/*   Updated: 2022/07/06 15:01:29 by ibulak        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <readline/readline.h>
@@ -10,16 +22,21 @@ int	main(void)
 	char	*str;
 	t_token	*tokens;
 	t_ast	*tree;
+	int		j;
 
 	while (1)
 	{
+		j = 0;
 		str = readline("MINIHELL> ");
 		if (!str)
 			exit(EXIT_FAILURE);
 		add_history(str);
 		tokens = tokenizer(str, tokens);
-		tree = parser(tokens);
-	print_tokens(tokens);
+		printf("before\n");
+		print_tokens(tokens);
+		printf("after pipe\n");
+		tree = parser(tokens, j);
+		// print_tree(tree);
 		free(str);
 		free(tokens);
 		free(tree);

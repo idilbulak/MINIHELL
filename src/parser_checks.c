@@ -6,7 +6,7 @@ int	check_pipe(t_token *tokens)
 {
 	while (tokens->next != NULL)
 	{
-		if (tokens->tokenType == 1)
+		if (tokens->tokentype == 1)
 			return(42);
 		tokens = tokens->next;
 	}
@@ -17,7 +17,7 @@ int	check_greater(t_token *tokens)
 {
 	while (tokens->next != NULL)
 	{
-		if (tokens->tokenType == 2)
+		if (tokens->tokentype == 2)
 			return(42);
 		tokens = tokens->next;
 	}
@@ -28,7 +28,7 @@ int	check_less(t_token *tokens)
 {
 	while (tokens->next != NULL)
 	{
-		if (tokens->tokenType == 3)
+		if (tokens->tokentype == 3)
 			return(42);
 		tokens = tokens->next;
 	}
@@ -39,7 +39,7 @@ int	check_doublegreater(t_token *tokens)
 {
 	while (tokens->next != NULL)
 	{
-		if (tokens->tokenType == 4)
+		if (tokens->tokentype == 4)
 			return(42);
 		tokens = tokens->next;
 	}
@@ -50,7 +50,7 @@ int	check_doubleless(t_token *tokens)
 {
 	while (tokens->next != NULL)
 	{
-		if (tokens->tokenType == 5)
+		if (tokens->tokentype == 5)
 			return(42);
 		tokens = tokens->next;
 	}

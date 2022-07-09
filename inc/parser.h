@@ -11,16 +11,17 @@ typedef enum e_parse
 
 typedef struct s_args
 {
-	char			**data;
+	char			*data;
 	t_tokentype		type;
 }	t_args;
 
 typedef struct s_ast
 {
-	t_args			*args;
-	struct t_ast	*outfile;
-	struct t_ast	*infile;
-	t_parse			type;
+	t_args			**args;
+	int				cmd_number;
+	struct t_ast	*right;
+	struct t_ast	*left;
+	t_parse			parse;
 }	t_ast;
 
 // ast_utils
@@ -35,11 +36,11 @@ int	check_doublegreater(t_token *tokens);
 int	check_doubleless(t_token *tokens);
 
 // parser without pipe
-t_ast	*simple_command(t_token *tokens);
-t_ast	*parse_greater(t_token *tokens);
-t_ast	*parse_less(t_token *tokens);
-t_ast	*parse_doublegreater(t_token *tokens);
-t_ast	*parse_doubleless(t_token *tokens);
+// t_ast	*simple_command(t_token *tokens);
+// t_ast	*parse_greater(t_token *tokens);
+// t_ast	*parse_less(t_token *tokens);
+// t_ast	*parse_doublegreater(t_token *tokens);
+// t_ast	*parse_doubleless(t_token *tokens);
 
 
 t_ast	*parser(t_token *tokens);

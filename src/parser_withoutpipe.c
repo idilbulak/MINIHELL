@@ -7,7 +7,7 @@
 // 	t_ast	*tree;
 
 // 	tree = init_tree(tree);
-// 	if (tokens->tokenType == TOKEN_GREATER)
+// 	if (tokens->tokentype == TOKEN_GREATER)
 // 	{
 // 		tree->data = NULL;
 // 		tree->type = TOKEN_GREATER;
