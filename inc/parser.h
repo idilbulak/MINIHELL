@@ -11,7 +11,7 @@ typedef enum e_parse
 
 typedef struct s_args
 {
-	char			*data;
+	char			**data;
 	t_tokentype		type;
 }	t_args;
 

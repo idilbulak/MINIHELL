@@ -35,7 +35,10 @@ int	main(void)
 		printf("before\n");
 		print_tokens(tokens);
 		printf("after pipe\n");
-		tree = parser(tokens, j);
+		int	n = n_token(tokens);
+		tree = init_tree(tree); //bunu da disari almalisin 
+		tree->args = malloc(sizeof(t_args) * (n + 1));  //n hesaplamalisiiiin pipelar disinda tokenlar
+		tree = parser(tokens);
 		// print_tree(tree);
 		free(str);
 		free(tokens);
