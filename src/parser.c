@@ -14,68 +14,109 @@
 #include "../inc/parser.h"
 #include <stdio.h>
 
-t_ast	*cmd_withoutpipe(t_token *tokens)
+int	calculate_n_args(t_token *tokens)
 {
-	t_ast	*tree;
-	int		n;
-	int		i;
-	int		cmd_number;
-	int		index;
+	int	n;
 
-
-	n = n_token(tokens);
-	i = 0;
-	while (i < n)
+	n = 0;
+	while(tokens->prev != NULL)
+		tokens = tokens->prev;
+	while (tokens->data != NULL)
 	{
-		index = 0;
-		while(tree->args != NULL)
-		{
-			index++;
-		}
 		if (tokens->tokentype == TOKEN_PIPE)
-			break ;
-		else if (check_ifredirection(tokens) == 1)
-		{
-			tree->args[index]->type = tokens->tokentype;
 			tokens = tokens->next;
-			tree->args[index]->data = tokens->data;
-		}
-		else if (tokens->tokentype == TOKEN_STRING)
-		{
-			tree->args[index]->type = tokens->tokentype;
-			tree->args[index]->data = tokens->data;
-		}
+		n++;
 		tokens = tokens->next;
+	}
+	return (n);
+}
+
+int	calculate_n_cmd(t_token *tokens)
+{
+	int	n;
+
+	n = 0;
+	while(tokens->prev != NULL)
+		tokens = tokens->prev;
+	while (tokens->data != NULL)
+	{
+		if (tokens->tokentype == TOKEN_PIPE)
+			tokens = tokens->next;
+		if (tokens->tokentype == TOKEN_FILEPATH)
+			tokens = tokens->next;
+		if (check_ifredirection(tokens) == 1)
+			tokens = tokens->next;
+		else
+			n++;
+		tokens = tokens->next;
+	}
+	return (n);
+}
+
+int	calculate_n_str(t_token *tokens)
+{
+	char	*str;
+	int		i;
+	int		n;
+
+	i = 0;
+	n = 1;
+	str = tokens->data;
+	while (str[i] != '\0')
+	{
+		if(str[i] == ' ')
+			n++;
 		i++;
 	}
-	return (tree);
+	return (n);
+}
+
+char	**split_token(t_token *tokens)
+{
+	char	**data;
+
+	if (tokens->tokentype == TOKEN_FILEPATH)
+	{
+		data = malloc(sizeof(char *) * 2);
+		data[0] = tokens->data;
+		data[1] = NULL;
+	}
+	else
+		data = ft_split(tokens->data, ' ');
+	return (data);
 }
 
 t_ast	*parser(t_token *tokens)
 {
 	t_ast	*tree;
+	int		i;
+	int		n;
 
-	if (check_pipe(tokens) == 42)
+	if (parser_checks(tokens) == -1)
+		exit(EXIT_FAILURE);
+	tree = init_tree(tree, tokens);
+	i = 0;
+	n = calculate_n_args(tokens) - 1;
+	while (i < n)
 	{
-		tree->parse = WITH_PIPE;
-		tree->left = cmd_withoutpipe(tokens);
-		while(tokens->data != NULL)
-		{
-			if (tokens->tokentype == TOKEN_PIPE)
-			{
-				tokens = tokens->next;
-				break;
-			}
+		if (tokens->tokentype == TOKEN_PIPE)
 			tokens = tokens->next;
+		if (tokens->tokentype == TOKEN_STRING)
+		{
+			tree->args[i]->type = TOKEN_STRING;
+			tree->args[i]->data = split_token(tokens);
 		}
-		tree->right = parser(tokens);
+		if (check_ifredirection(tokens) == 1)
+		{
+			tree->args[i]->type = tokens->tokentype;
+				tokens = tokens->next;
+			tree->args[i]->data = split_token(tokens);
+		}
+		tokens = tokens->next;
+		i++;
 	}
-	else
-	{
-		tree->parse = WITHOUT_PIPE;
-		tree = cmd_withoutpipe(tokens);
-	}
-
-	// printf("data[%d] = %s\n", i, tree->args[i]);
-	return (0);
+	tree->args[n]->data = malloc(sizeof(char *) * 1);
+	tree->args[n]->data[0] = NULL;
+	tree->args[n]->type = TOKEN_null;
+	return (tree);
 }

@@ -2,7 +2,7 @@
 #include "../inc/parser.h"
 #include <stdio.h>
 
-int	check_pipe(t_token *tokens)
+int	if_pipe(t_token *tokens)
 {
 	while (tokens->next != NULL)
 	{
@@ -10,49 +10,47 @@ int	check_pipe(t_token *tokens)
 			return(42);
 		tokens = tokens->next;
 	}
-	return (0);
+	return (-1);
 }
 
-int	check_greater(t_token *tokens)
+int	check_pipe(t_token *tokens)
 {
-	while (tokens->next != NULL)
+	if (tokens->tokentype == TOKEN_PIPE)
+		return (-1);
+	while (tokens->data != NULL)
 	{
-		if (tokens->tokentype == 2)
-			return(42);
+		if (tokens->tokentype == TOKEN_PIPE)
+		{
+			if (tokens->next->data == NULL)
+				return (-1);
+		}
 		tokens = tokens->next;
 	}
-	return (0);
+	return (1);
 }
 
-int	check_less(t_token *tokens)
+int	check_redirection(t_token *tokens)
 {
-	while (tokens->next != NULL)
+	while (tokens->data != NULL)
 	{
-		if (tokens->tokentype == 3)
-			return(42);
+		if (check_ifredirection(tokens) == 1)
+		{
+			if (tokens->next->data == NULL)
+				return (-1);
+		}
 		tokens = tokens->next;
 	}
-	return (0);
+	return (1);
 }
 
-int	check_doublegreater(t_token *tokens)
+int	parser_checks(t_token *tokens)
 {
-	while (tokens->next != NULL)
-	{
-		if (tokens->tokentype == 4)
-			return(42);
-		tokens = tokens->next;
-	}
-	return (0);
-}
+	int	n;
 
-int	check_doubleless(t_token *tokens)
-{
-	while (tokens->next != NULL)
-	{
-		if (tokens->tokentype == 5)
-			return(42);
-		tokens = tokens->next;
-	}
-	return (0);
+	n = 0;
+	if (if_pipe(tokens) == 42)
+		n = check_pipe(tokens);
+	if (check_ifpath(tokens) == 1)
+		n = check_redirection(tokens);
+	return (n);
 }

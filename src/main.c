@@ -16,6 +16,7 @@
 #include <readline/history.h>
 #include "../inc/tokenizer.h"
 #include "../inc/parser.h"
+#include <stdio.h>
 
 int	main(void)
 {
@@ -32,14 +33,10 @@ int	main(void)
 			exit(EXIT_FAILURE);
 		add_history(str);
 		tokens = tokenizer(str, tokens);
-		printf("before\n");
-		print_tokens(tokens);
-		printf("after pipe\n");
-		int	n = n_token(tokens);
-		tree = init_tree(tree); //bunu da disari almalisin 
-		tree->args = malloc(sizeof(t_args) * (n + 1));  //n hesaplamalisiiiin pipelar disinda tokenlar
+		// print_tokens(tokens);
 		tree = parser(tokens);
-		// print_tree(tree);
+		// print_tree(tree, tokens);
+		executor(tree);
 		free(str);
 		free(tokens);
 		free(tree);

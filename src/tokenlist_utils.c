@@ -105,7 +105,7 @@ int		find_command_index(t_token *tokens, char *token)
 	{
 		if(tokens->tokentype == TOKEN_STRING)
 			cmd_index++;
-		if (tokens->data = token)
+		if (tokens->data == token)
 			break ;
 		tokens = tokens->next;
 	}

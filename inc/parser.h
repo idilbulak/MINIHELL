@@ -3,11 +3,11 @@
 
 #include "tokenizer.h"
 
-typedef enum e_parse
-{
-	WITH_PIPE,
-	WITHOUT_PIPE
-}	t_parse;
+// typedef enum e_parse
+// {
+// 	WITH_PIPE,
+// 	WITHOUT_PIPE
+// }	t_parse;
 
 typedef struct s_args
 {
@@ -19,30 +19,35 @@ typedef struct s_ast
 {
 	t_args			**args;
 	int				cmd_number;
-	struct t_ast	*right;
-	struct t_ast	*left;
-	t_parse			parse;
 }	t_ast;
 
-// ast_utils
-void	*print_simple_command(t_ast *tree, t_token *tokens);
-t_ast	*init_tree(t_ast *tree);
+typedef struct	s_filed
+{
+	int		tmpin;
+	int		tmpout;
+    int     redirect_out;
+	int		in;
+	int		out;
+}	t_filed;
 
-// parser checks
-int	check_pipe(t_token *tokens);
-int	check_greater(t_token *tokens);
-int	check_less(t_token *tokens);
-int	check_doublegreater(t_token *tokens);
-int	check_doubleless(t_token *tokens);
-
-// parser without pipe
-// t_ast	*simple_command(t_token *tokens);
-// t_ast	*parse_greater(t_token *tokens);
-// t_ast	*parse_less(t_token *tokens);
-// t_ast	*parse_doublegreater(t_token *tokens);
-// t_ast	*parse_doubleless(t_token *tokens);
-
-
+// parser
+int		calculate_n_args(t_token *tokens);
+int		calculate_index_token(t_token *tokens, char *token);
+int		calculate_n_str(t_token *tokens);
+char	**split_token(t_token *tokens);
+int	calculate_n_cmd(t_token *tokens);
 t_ast	*parser(t_token *tokens);
 
+// ast utils
+t_ast	*init_tree(t_ast *tree, t_token *tokens);
+void	print_tree(t_ast *tree, t_token *tokens);
+
+//checks
+int	if_pipe(t_token *tokens);
+int	check_pipe(t_token *tokens);
+int	check_redirection(t_token *tokens);
+int	parser_checks(t_token *tokens);
+
+
+void	executor(t_ast *ast);
 #endif

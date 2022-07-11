@@ -44,11 +44,11 @@ t_token	*find_path(t_token *tokens)
 		if (tokens->tokentype == TOKEN_GREATER)
 			tokens->next->tokentype = TOKEN_FILEPATH;
 		if (tokens->tokentype == TOKEN_LESS)
-			tokens->prev->tokentype = TOKEN_FILEPATH;
+			tokens->next->tokentype = TOKEN_FILEPATH;
 		if (tokens->tokentype == TOKEN_DOUBLEGREATER)
 			tokens->next->tokentype = TOKEN_FILEPATH;
 		if (tokens->tokentype == TOKEN_DOUBLELESS)
-			tokens->prev->tokentype = TOKEN_FILEPATH;
+			tokens->next->tokentype = TOKEN_FILEPATH;
 		tokens = tokens->next;
 	}
 	while (tokens->prev != NULL)
