@@ -16,6 +16,7 @@
 #include <readline/history.h>
 #include "../inc/tokenizer.h"
 #include "../inc/parser.h"
+#include "../inc/exec.h"
 #include <stdio.h>
 
 int	main(void)

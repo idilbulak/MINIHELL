@@ -3,12 +3,6 @@
 
 #include "tokenizer.h"
 
-// typedef enum e_parse
-// {
-// 	WITH_PIPE,
-// 	WITHOUT_PIPE
-// }	t_parse;
-
 typedef struct s_args
 {
 	char			**data;
@@ -20,15 +14,6 @@ typedef struct s_ast
 	t_args			**args;
 	int				cmd_number;
 }	t_ast;
-
-typedef struct	s_filed
-{
-	int		tmpin;
-	int		tmpout;
-    int     redirect_out;
-	int		in;
-	int		out;
-}	t_filed;
 
 // parser
 int		calculate_n_args(t_token *tokens);
@@ -48,6 +33,4 @@ int	check_pipe(t_token *tokens);
 int	check_redirection(t_token *tokens);
 int	parser_checks(t_token *tokens);
 
-
-void	executor(t_ast *ast);
 #endif

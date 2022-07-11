@@ -1,3 +1,4 @@
+#include "../inc/exec.h"
 #include "../inc/tokenizer.h"
 #include "../inc/parser.h"
 #include <stdlib.h>

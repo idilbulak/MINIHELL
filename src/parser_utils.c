@@ -48,13 +48,18 @@ void	print_tree(t_ast *tree, t_token *tokens)
 	printf("total arg number: %d\n", calculate_n_args(tokens));
 	{
 		printf("tree->args[0]->type: %d\n", tree->args[0]->type);
-		printf("tree->args[0]->data[0]: %s\n", tree->args[0]->data[0]);
-		printf("tree->args[0]->data[1]: %s\n", tree->args[0]->data[1]);
-		printf("tree->args[0]->data[2]: %s\n", tree->args[0]->data[2]);
-		// printf("tree->args[0]->type: %d\n", tree->args[1]->type);
-		// printf("tree->args[1]->data[0]: %s\n", tree->args[1]->data[0]);
-		// printf("tree->args[1]->data[1]: %s\n", tree->args[1]->data[1]);
-		// printf("tree->args[2]->type: %d\n", tree->args[2]->type);
-		// printf("tree->args[2]->data[0]: %s\n", tree->args[2]->data[0]);
+		printf("tree->args[0]->data[0]: echo? %s\n", tree->args[0]->data[0]);
+		printf("tree->args[0]->data[1]: idil? %s\n", tree->args[0]->data[1]);
+		printf("tree->args[0]->data[2]: null? %s\n", tree->args[0]->data[2]);
+		printf("tree->args[1]->type: %d\n", tree->args[1]->type);
+		printf("tree->args[1]->data[0]: file? %s\n", tree->args[1]->data[0]);
+		printf("tree->args[1]->data[1]: null? %s\n", tree->args[1]->data[1]);
+		printf("tree->args[2]->type: %d\n", tree->args[2]->type);
+		printf("tree->args[2]->data[0]: file? %s\n", tree->args[2]->data[0]);
+		printf("tree->args[2]->data[1]: null? %s\n", tree->args[2]->data[1]);
+		printf("tree->args[3]->type: %d\n", tree->args[3]->type);
+		printf("tree->args[3]->data[0]: file? %s\n", tree->args[3]->data[0]);
+		printf("tree->args[3]->data[1]: null? %s\n", tree->args[3]->data[1]);
+		// printf("tree->args[2]->data[2]: null? %s\n", tree->args[2]->data[2]);
 	}
 }

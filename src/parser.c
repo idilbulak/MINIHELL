@@ -110,9 +110,11 @@ t_ast	*parser(t_token *tokens)
 		{
 			tree->args[i]->type = tokens->tokentype;
 				tokens = tokens->next;
+			
 			tree->args[i]->data = split_token(tokens);
 		}
-		tokens = tokens->next;
+		if(tokens->data != NULL)
+			tokens = tokens->next;
 		i++;
 	}
 	tree->args[n] = malloc(sizeof(t_args));
