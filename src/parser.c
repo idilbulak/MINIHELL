@@ -96,7 +96,7 @@ t_ast	*parser(t_token *tokens)
 		exit(EXIT_FAILURE);
 	tree = init_tree(tree, tokens);
 	i = 0;
-	n = calculate_n_args(tokens) - 1;
+	n = calculate_n_args(tokens);
 	while (i < n)
 	{
 		if (tokens->tokentype == TOKEN_PIPE)
@@ -115,8 +115,8 @@ t_ast	*parser(t_token *tokens)
 		tokens = tokens->next;
 		i++;
 	}
-	tree->args[n]->data = malloc(sizeof(char *) * 1);
-	tree->args[n]->data[0] = NULL;
-	tree->args[n]->type = TOKEN_null;
+	tree->args[n] = malloc(sizeof(t_args));
+	tree->args[n] = NULL;
+	
 	return (tree);
 }

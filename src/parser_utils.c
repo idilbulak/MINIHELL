@@ -51,10 +51,10 @@ void	print_tree(t_ast *tree, t_token *tokens)
 		printf("tree->args[0]->data[0]: %s\n", tree->args[0]->data[0]);
 		printf("tree->args[0]->data[1]: %s\n", tree->args[0]->data[1]);
 		printf("tree->args[0]->data[2]: %s\n", tree->args[0]->data[2]);
-		printf("tree->args[0]->type: %d\n", tree->args[1]->type);
-		printf("tree->args[1]->data[0]: %s\n", tree->args[1]->data[0]);
-		printf("tree->args[1]->data[1]: %s\n", tree->args[1]->data[1]);
-		printf("tree->args[2]->type: %d\n", tree->args[2]->type);
-		printf("tree->args[2]->data[0]: %s\n", tree->args[2]->data[0]);
+		// printf("tree->args[0]->type: %d\n", tree->args[1]->type);
+		// printf("tree->args[1]->data[0]: %s\n", tree->args[1]->data[0]);
+		// printf("tree->args[1]->data[1]: %s\n", tree->args[1]->data[1]);
+		// printf("tree->args[2]->type: %d\n", tree->args[2]->type);
+		// printf("tree->args[2]->data[0]: %s\n", tree->args[2]->data[0]);
 	}
 }
