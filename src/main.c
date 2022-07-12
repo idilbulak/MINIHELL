@@ -17,18 +17,22 @@
 #include "../inc/tokenizer.h"
 #include "../inc/parser.h"
 #include "../inc/exec.h"
+#include "../inc/env.h"
+#include "../inc/signals.h"
 #include <stdio.h>
 
-int	main(void)
+t_env	global_env;
+
+int	main(int argc, char **argv, char **env)
 {
 	char	*str;
 	t_token	*tokens;
 	t_ast	*tree;
-	int		j;
 
+	// init_env(env);
+	// init_signals();
 	while (1)
 	{
-		j = 0;
 		str = readline("MINIHELL> ");
 		if (!str)
 			exit(EXIT_FAILURE);

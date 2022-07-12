@@ -14,10 +14,12 @@ INCLUDES		=	./inc/
 AR				=	ar
 ARFLAGS			=	rcs
 
-SRCS_F			=	tokenizer.c main.c tokenlist_utils.c libft.c tokenizer_helper.c \
-					tokenizer_helper2.c \
-					parser.c parser_utils.c parser_checks.c \
-					exec.c
+SRCS_F			=	tokenizer/tokenizer.c tokenizer/tokenlist_utils.c tokenizer/tokenizer_helper.c \
+					tokenizer/tokenizer_helper2.c \
+					parser/parser.c parser/parser_utils.c parser/parser_checks.c \
+					executor/exec.c \
+					main.c libft.c
+		
 
 SRCS			= 	$(addprefix $(SRCS_DIR), $(SRCS_F))
 
